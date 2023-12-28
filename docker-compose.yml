@@ -1,0 +1,14 @@
+version: "3.0"
+
+services:
+  bind:
+    image: "natechoe/bind"
+    container_name: bind
+    ports:
+      - "53:53"
+      - "53:53/udp"
+    volumes:
+      - "./db.natechoe.dev.tmp.signed:/etc/bind/db.natechoe.dev"
+      - "./named.conf:/etc/bind/named.conf"
+    restart:
+      always

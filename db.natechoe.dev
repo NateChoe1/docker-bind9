@@ -1,0 +1,36 @@
+$ORIGIN natechoe.dev
+$TTL	3600
+
+natechoe.dev.	IN SOA	ns1.natechoe.dev. nate.natechoe.dev. (
+			__SERIAL_NO__	; Serial
+			7200		; Refresh
+			3600		; Retry
+			86400		; Expire
+			3600 )		; Negative Cache TTL
+
+$INCLUDE "__KSK_FILE__"
+$INCLUDE "__ZSK_FILE__"
+
+ns1.natechoe.dev.		IN A	45.19.51.169
+ns1.natechoe.dev.		IN AAAA	2600:1700:130:50cf:fc88:b10b:5d62:1add
+
+natechoe.dev.			IN A	45.19.51.169
+natechoe.dev.			IN AAAA	2600:1700:130:50cf:215:5dff:fe01:e606
+
+mail.natechoe.dev.		IN A	45.19.51.169
+mail.natechoe.dev.		IN AAAA	2600:1700:130:50cf:fc88:b10b:5d62:1add
+
+; AAAA natechoe.dev. = reverse-proxy
+; AAAA mail.natechoe.dev. = amdserver
+www.natechoe.dev.		IN CNAME	natechoe.dev.
+
+natechoe.dev.			IN NS	ns1.natechoe.dev.
+
+natechoe.dev.			IN MX	0 mail.natechoe.dev.
+
+_dmarc.natechoe.dev.		IN TXT	"v=DMARC1; p=reject; rua=mailto:dmarc@natechoe.dev; fo=1"
+mail._domainkey.natechoe.dev.	IN TXT	( "v=DKIM1; h=sha256; k=rsa; "
+          "p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA5R0dp1UszfhMyUye6AO9X6DxvwOwfoljmr6MyAj1hOA+Hc1PY6f8YrVlhDTR6uvgxoX8ywIGASOHYInUvgXPCtYPZwPR0YltnLPWZlXQ/aDrAqs48icyWfk0C+3CGXPY+bzhBn6bcW7yDZrcusbJRst9SUx4ZXAfwCGXbZR28CnsvUMsgQMujKaY6+btU5HZ3jdxp+cJjG9Lej"
+          "H60w7nY+EiinDrqrlwvMG7DKDgJrlb39xUquZTrHWPZOg2MTugaRQ4IOi6hVmq23QO+mvMgWXkPB45dJzYm4lbiHf6Nd8MIjGIH3X+5db5Lm1V4a9O+/oA05FXTOinkGkcrYC+YbEhlI/f5UXtphJ9pQ5WcxOUSob8MQfkEhvpn4ObEtGfsZzYzGNPOi3N/rsFMHl4aRLAiwAyUtKlL4IhzZWQynWlrRnY2I9XRX5FdUHfobxoSBgIJLCm"
+          "pliT4ayci9ZzWR30Y2i/MV5JkgXDX489jF7rnREwUnNpox1fyqj1krYyGOMHdYM88PPP9Wsk9aT5FKsiMYHWP4UZhP8DT7BQBq+xPV7fYgyA+eRx4001lQev/wUPLZwiSdJRwYvuDrQzuczJDTQSwuRqJIP1Ce4qYW+X0SsT99uIuaHfN/F9uf3t2dDhh2CP/ajwP9J6fcDlkGjJvKoLgqyfCbD0tFcyovsCAwEAAQ==" )  ; ----- DKIM key mail for natechoe.dev
+natechoe.dev.			IN TXT	"v=spf1 mx a:mail.natechoe.dev -all"
